@@ -18,7 +18,7 @@ server_run = f"python3 {link_to_server}"
 def positive_test_case(request):
     process = Popen(server_run, shell=True, preexec_fn=os.setsid)
     # give the server a few seconds to start
-    sleep(2)
+    sleep(3)
     yield request.param
     os.killpg(process.pid, signal.SIGTERM)
 
