@@ -130,7 +130,7 @@ def test_resource_creation_with_no_token(session_fixture, token):
     """ verifies impossibility to create a resource with no access token """
     url, access_token = testdata.url, token
     response = requests.post(
-        testdata.url + 'items', json=testdata.resources[0], headers={'Authorization': f'Bearer {access_token}'}
+        url + 'items', json=testdata.resources[0], headers={'Authorization': f'Bearer {access_token}'}
     )
     with pytest.raises(HTTPError):
         response.raise_for_status()
