@@ -4,6 +4,8 @@ url = 'http://0.0.0.0:5002/'
 
 correct_credentials = (
     {'user_name': 'test', 'password': 'test'},
+    {'user_name': 'test', 'password': 'test'},
+    {'user_name': 'test', 'password': 'test'},
 )
 
 incorrect_credentials = (
@@ -21,4 +23,4 @@ resources = (
 ### DYNAMIC DATA ###
 
 access_token = ''
-resource_id = ''
+resource_id = []
