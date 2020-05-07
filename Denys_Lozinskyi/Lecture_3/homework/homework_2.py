@@ -1,9 +1,14 @@
 #! /usr/bin/python3.7
 import requests
 from requests.exceptions import HTTPError
+from urllib.parse import urljoin
+import Denys_Lozinskyi.Lecture_3.homework.api as api
 
 
-URL = 'http://0.0.0.0:5002/'
+url_login = urljoin(api.base_url, api.login_endpoint)
+url_protected = urljoin(api.base_url, api.protected_endpoint)
+url_items = urljoin(api.base_url, api.items_endpoint)
+
 access_token = ''
 
 
@@ -11,8 +16,7 @@ def authorize(user_name: str, password: str):
     """ Does authorization at the server by JWT """
     try:
         response = requests.post(
-            URL + 'login',
-            json={'username': user_name, 'password': password}
+            url_login, json={'username': user_name, 'password': password}
         )
         print(f'\nLOGGING IN as "{user_name}"')
         global access_token
@@ -25,7 +29,7 @@ def authorize(user_name: str, password: str):
 
     try:
         response = requests.get(
-            URL + 'protected', headers={'Authorization': f'Bearer {access_token}'}
+            url_protected, headers={'Authorization': f'Bearer {access_token}'}
         )
         print(f'AUTHORIZATION...')
         response.raise_for_status()
@@ -44,7 +48,7 @@ def create_resource(item: dict) -> str:
     """
     try:
         response = requests.post(
-            URL + 'items', json=item, headers={'Authorization': f'Bearer {access_token}'}
+            url_items, json=item, headers={'Authorization': f'Bearer {access_token}'}
         )
         print(f'\nCREATING THE RESOURCE "{item}"')
         response.raise_for_status()
@@ -64,7 +68,7 @@ def read_resource(res_id: str):
     """
     try:
         response = requests.get(
-            URL + f'items/{res_id}', headers={'Authorization': f'Bearer {access_token}'}
+            f'{url_items}/{res_id}', headers={'Authorization': f'Bearer {access_token}'}
         )
         print(f'\nREADING THE RESOURCE with ID "{res_id}"')
         response.raise_for_status()
@@ -83,7 +87,7 @@ def delete_resource(res_id: str):
     """
     try:
         response = requests.delete(
-            URL + f'items/{res_id}', headers={'Authorization': f'Bearer {access_token}'}
+            f'{url_items}/{res_id}', headers={'Authorization': f'Bearer {access_token}'}
         )
         print(f'\nDELETING THE RESOURCE with ID "{res_id}"')
         response.raise_for_status()
@@ -96,7 +100,6 @@ def delete_resource(res_id: str):
 
 
 if __name__ == '__main__':
-
     authorize('test', 'test')
     resource_id = create_resource({'item': 'SOME GOODS'})
     read_resource(resource_id)
