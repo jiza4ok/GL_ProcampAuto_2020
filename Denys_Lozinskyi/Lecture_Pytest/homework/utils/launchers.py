@@ -29,7 +29,7 @@ def start_server(link_to_server: str, timeout=5) -> Popen:
             break
     else:
         os.killpg(server_process.pid, signal.SIGTERM)
-        raise Exception('Server is not responding')
+        raise Exception("Server is not responding")
     return server_process
 
 

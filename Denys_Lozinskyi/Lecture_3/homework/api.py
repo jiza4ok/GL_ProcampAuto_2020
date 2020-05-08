@@ -1,10 +1,10 @@
 
 # URLs
-base_url = 'http://0.0.0.0:5002'
+BASE_URL = 'http://0.0.0.0:5002'
 
 
 # ENDPOINTS
-root_endpoint = '/'
-login_endpoint = '/login'
-protected_endpoint = '/protected'
-items_endpoint = '/items'
+ROOT_ENDPOINT = '/'
+LOGIN_ENDPOINT = '/login'
+PROTECTED_ENDPOINT = '/protected'
+ITEMS_ENDPOINT = '/items'

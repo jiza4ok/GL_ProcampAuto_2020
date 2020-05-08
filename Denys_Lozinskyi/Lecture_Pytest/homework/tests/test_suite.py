@@ -26,7 +26,8 @@ def authorization_fixture(request):
         Authorizes at a server, yields access token to the tests or fixtures related
     """
     access_token, server_response = api.jwt_authorize(request.param['user_name'], request.param['password'])
-    assert helpers.status_code_is_2xx(server_response)
+    if helpers.status_code_is_2xx(server_response) is False:
+        raise Exception('Error is SETUP: Authorization failed')
     yield access_token
 
 
@@ -39,7 +40,8 @@ def resource_creation_fixture(authorization_fixture):
     """
     access_token, resource = authorization_fixture, testdata.resource
     resource_id, server_response = api.create_resource(access_token, resource)
-    assert helpers.status_code_is_2xx(server_response)
+    if helpers.status_code_is_2xx(server_response) is False:
+        raise Exception('Error is SETUP: Resource creation failed')
     yield resource_id, resource, access_token
 
 
@@ -55,21 +57,20 @@ def test_authorization(session_fixture, credentials):
 @allure.title('Creation of the resource')
 def test_resource_creation(session_fixture, authorization_fixture):
     """ Verifies that a resource can be created given a proper token obtained after authorization """
-    access_token = authorization_fixture
-    resource_id, server_response = api.create_resource(access_token, testdata.resource)
+    resource_id, server_response = api.create_resource(token=authorization_fixture, resource=testdata.resource)
     assert helpers.status_code_is_2xx(server_response)
 
 
-@allure.title('Reading of the resource by ID')
+@allure.title('Reading of the resource by its ID')
 def test_resource_reading(session_fixture, resource_creation_fixture):
-    """ Verifies that a resource can be read by its ID given a proper token obtained after authorization """
+    """ Verifies a resource can be read by its ID given a proper token obtained after authorization """
     resource_id, created_resource, access_token = resource_creation_fixture
     resource_content, server_response = api.read_resource(access_token, resource_id)
     assert helpers.status_code_is_2xx(server_response)
     assert resource_content == created_resource
 
 
-@allure.title('Deletion of the resource ID')
+@allure.title('Deletion of the resource by its ID')
 def test_resource_deletion(session_fixture, resource_creation_fixture):
     """ Verifies a resource can be deleted by its ID given a proper token obtained after authorization """
     resource_id, created_resource, access_token = resource_creation_fixture

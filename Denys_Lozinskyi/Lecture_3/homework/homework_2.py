@@ -5,9 +5,9 @@ from urllib.parse import urljoin
 import Denys_Lozinskyi.Lecture_3.homework.api as api
 
 
-url_login = urljoin(api.base_url, api.login_endpoint)
-url_protected = urljoin(api.base_url, api.protected_endpoint)
-url_items = urljoin(api.base_url, api.items_endpoint)
+url_login = urljoin(api.BASE_URL, api.LOGIN_ENDPOINT)
+url_protected = urljoin(api.BASE_URL, api.PROTECTED_ENDPOINT)
+url_items = urljoin(api.BASE_URL, api.ITEMS_ENDPOINT)
 
 access_token = ''
 
@@ -104,4 +104,3 @@ if __name__ == '__main__':
     resource_id = create_resource({'item': 'SOME GOODS'})
     read_resource(resource_id)
     delete_resource(resource_id)
-
