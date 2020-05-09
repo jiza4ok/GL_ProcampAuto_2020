@@ -1,0 +1,6 @@
+users = '/users'
+login = '/login'
+fail = '/fail500'
+protected = '/protected'
+items = '/items'
+base_auth = '/basic_auth'
