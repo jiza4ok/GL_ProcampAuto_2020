@@ -4,6 +4,7 @@ import requests
 from global_scope import base_url
 from homework.rest import api_pathes
 from homework.rest.api_pathes import items, login
+
 url_items = urljoin(base_url, api_pathes.items)
 
 
