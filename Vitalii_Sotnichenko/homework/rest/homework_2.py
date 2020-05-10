@@ -1,17 +1,17 @@
 from urllib.parse import urljoin
 
 import requests
-from global_scope import base_url
-from homework.rest import api_pathes
-from homework.rest.api_pathes import items, login
+from global_scope import BASE_URL
+from homework.rest.api_pathes import ITEMS, LOGIN
 
-url_items = urljoin(base_url, api_pathes.items)
+url_items = urljoin(BASE_URL, ITEMS)
+url_login = urljoin(BASE_URL, LOGIN)
 
 
 def authorization_and_get_token(name='test', password='test'):
     """ Get token for JWT """
     response = requests.post(
-        base_url + login,
+        url_login,
         json={'username': 'test', 'password': 'test'}
     )
     token = response.json()['access_token']
@@ -47,7 +47,7 @@ def delete_resource(item_id):
     :return: none
     """
     response = requests.delete(
-        f'{base_url}{items}/{item_id}',
+        f'{url_items}/{item_id}',
         headers={'Authorization': f'Bearer {authorization_and_get_token()}'}
     )
     print(response.status_code)

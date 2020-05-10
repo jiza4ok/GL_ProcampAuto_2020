@@ -1,9 +1,9 @@
 import requests
-from global_scope import base_url
-from homework.rest.api_pathes import fail, users
+from global_scope import BASE_URL
+from homework.rest.api_pathes import FAIL, USERS
 from requests.exceptions import HTTPError
 
-for url in [base_url, base_url + fail, base_url + users]:
+for url in [BASE_URL, BASE_URL + FAIL, BASE_URL + USERS]:
     try:
         print(f'\nSend Get request to {url}')
         response = requests.get(url)

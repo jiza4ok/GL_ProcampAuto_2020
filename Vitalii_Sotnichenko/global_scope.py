@@ -1,1 +1,1 @@
-base_url = 'http://localhost:5002'
+BASE_URL = 'http://localhost:5002'

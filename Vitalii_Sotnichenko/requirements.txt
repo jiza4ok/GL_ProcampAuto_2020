@@ -3,3 +3,4 @@ flask_httpauth
 flask_jwt_extended
 Flask-Caching
 pytest==3.7.2
+allure-pytest==2.8.13
