@@ -1,0 +1,13 @@
+Task: "После неудачного мержа вам нужно удалить последний коммит в вашей ветке. 
+условие1. Ветка уже была отправлена в удаленный репозиторий с коммитом, который вам не нужен. 
+условие2. push -f отключен"	
+
+
+Solution:
+git checkout branch_with_bad_commit
+git revert commit_id  --> enter revert commit message in the editor if needed
+git push origin branch_with_bad_commit
+						
+
+Result:
+Bad commit is covered with new commit that inverses the changes
