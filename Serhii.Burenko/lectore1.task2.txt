@@ -1,0 +1,5 @@
+git checkout my_branch
+git stash
+git add .
+git commit --amend
+git stash apply
