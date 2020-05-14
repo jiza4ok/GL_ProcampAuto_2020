@@ -1,0 +1,9 @@
+1) "После неудачного мержа вам нужно удалить последний коммит в вашей ветке. 
+условие1. Ветка уже была отправлена в удаленный репозиторий с коммитом, который вам не нужен. 
+условие2. push -f отключен"	
+
+
+Solution:
+If you want to delete wrong commit on  the local machine - git revert HEAD~1..HEAD
+If you want to delete same commit in your Github repository just synchronise your repositories by  using following command - git push origin "name of your branch" 
+
