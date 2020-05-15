@@ -1,0 +1,4 @@
+git checkout my_branch
+git revert <wrong commit hash>
+git commit
+git push origin my_branch
