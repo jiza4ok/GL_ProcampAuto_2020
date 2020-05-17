@@ -1,0 +1,10 @@
+Task:
+"После неудачного мержа вам нужно удалить последний коммит в вашей ветке. 
+условие1. Ветка уже была отправлена в удаленный репозиторий с коммитом, который вам не нужен. 
+условие2. push -f отключен"							
+
+Solution:
+Git checkout -b Yuliya_Lysenko
+Touch lecture1_task1.txt
+Git status
+Git add lecture1_task1.txt
