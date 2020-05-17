@@ -1,0 +1,33 @@
+Task:
+"У вас есть два ветки: master, US_123, которая растет от master. В master нашли багу несовместимую с жизнью продукта.
+1. Вам срочно нужно сделать хотфикс баги, которая была найдена в ветке master.
+2. После того, как вы закоммититли и зарелизили багу, вам нужно получить этот же фикс в ветке US_123"							
+
+Solution:
+git stash
+git checkout master
+git pull
+git checkout -b hotfix
+git stash apply
+new file:   git_homework/lecture1_task3.txt
+git commit -m "hotfix"
+git push origin hotfix
+
+PR is merged
+
+git checkout master
+git pull
+git checkout Yuliya_Lysenko
+git rebase master (git merge origin/master)
+git push --force origin Yuliya_Lysenko
+
+OR
+git checkout master
+git pull
+git checkout Yuliya_Lysenko
+git fetch origin
+get rebase origin/master 
+git push --force origin Yuliya_Lysenko
+git status
+On branch Yuliya_Lysenko
+Your branch is up to date with 'origin/Yuliya_Lysenko'.
