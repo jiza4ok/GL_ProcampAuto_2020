@@ -1,0 +1,20 @@
+Task:
+"После неудачного мержа вам нужно удалить последний коммит в вашей ветке. 
+условие1. Ветка уже была отправлена в удаленный репозиторий с коммитом, который вам не нужен. 
+условие2. push -f отключен"							
+
+Solution:
+Git checkout -b Yuliya_Lysenko
+Touch lecture1_task1.txt
+Git status
+Git add lecture1_task1.txt
+git commit -m "bad commit"
+git push origin Yuliya_Lysenko
+create draft pull request
+git log
+git revert f35231c
+git status
+git push
+fatal: The current branch Yuliya_Lysenko has no upstream branch.
+git push --set-upstream origin Yuliya_Lysenko
+Branch 'Yuliya_Lysenko' set up to track remote branch 'Yuliya_Lysenko' from 'origin'.
