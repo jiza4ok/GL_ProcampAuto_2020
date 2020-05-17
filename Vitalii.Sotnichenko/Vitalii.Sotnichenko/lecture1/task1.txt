@@ -1,0 +1,11 @@
+Task:
+
+После неудачного мержа вам нужно удалить последний коммит в вашей ветке.
+условие1. Ветка уже была отправлена в удаленный репозиторий с коммитом, который вам не нужен.
+условие2. push -f отключен
+
+
+git checkout some_branch
+git revert HEAD
+git commit -m "Revert last commit"
+git push origin some_branch
