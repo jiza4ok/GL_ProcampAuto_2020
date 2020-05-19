@@ -1,0 +1,20 @@
+git stash
+git checkout master
+git commit -am "hotfix"
+git push
+git checkout -b US_123_copy
+git stash apply
+git branch -d US_123
+
+
+======================
+Second case
+
+git stash
+git checkout master
+git commit -am "hotfix"
+git push
+git checkout US_123
+git merge master
+git stash apply
+
