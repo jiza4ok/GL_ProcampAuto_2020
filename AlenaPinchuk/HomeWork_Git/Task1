@@ -1,0 +1,4 @@
+git status
+git checkout my_branch
+git revert HEAD
+git push
