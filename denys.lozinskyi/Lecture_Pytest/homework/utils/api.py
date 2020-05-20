@@ -17,15 +17,15 @@ def jwt_authorize(user_name: str, password: str) -> tuple:
         Returns the access token obtained, and the server response.
         :param user_name: user name
         :param password: user password
-        :return :tuple (access_token, server_response). If token was not received its value is None
+        :return :tuple (server_response, access_token). If token was not received its value is None
     """
     response = requests.post(url_login, json={'username': user_name, 'password': password})
     try:
         access_token = response.json()['access_token']
     except KeyError:
-        return None, response
+        return response, None
     response = requests.get(url_protected, headers={'Authorization': f'Bearer {access_token}'})
-    return access_token, response
+    return response, access_token
 
 
 def create_resource(token: str, resource: str) -> tuple:
@@ -33,7 +33,7 @@ def create_resource(token: str, resource: str) -> tuple:
         Returns an id of the resource created, and the server response.
         :param token: jwt access token
         :param resource: resource to create
-        :return :tuple (resource_id, server_response). If resource creation failed, the id is None
+        :return :tuple (server_response, resource_id). If resource creation failed, the id is None
     """
     response = requests.post(url_items, json=resource, headers={'Authorization': f'Bearer {token}'})
     try:
@@ -41,10 +41,10 @@ def create_resource(token: str, resource: str) -> tuple:
         # and makes them accessible by the index in that list. Thus, actual item id is its index
         resource_id = response.json()['id'] - 1
     except KeyError:
-        return None, response
+        return response, None
     else:
         # return resource id as a str, because the server expects resource id being str
-        return str(resource_id), response
+        return response, str(resource_id)
 
 
 def read_resource(token: str, resource_id: str) -> tuple:
@@ -52,15 +52,15 @@ def read_resource(token: str, resource_id: str) -> tuple:
         Returns the server response.
         :param token: jwt access token
         :param resource_id: resource id
-        :return :tuple (resource_content, server_response). If resource reading failed, the resource_content is None
+        :return :tuple (server_response, resource_content). If resource reading failed, the resource_content is None
     """
     response = requests.get(f'{url_items}/{resource_id}', headers={'Authorization': f'Bearer {token}'})
     try:
         resource_content = response.json()['items']
     except KeyError:
-        return None, response
+        return response, None
     else:
-        return resource_content, response
+        return response, resource_content
 
 
 def delete_resource(token: str, resource_id: str) -> Response:
@@ -68,7 +68,7 @@ def delete_resource(token: str, resource_id: str) -> Response:
         Returns the server response.
         :param token: jwt access token
         :param resource_id: resource id
-        :return server_response
+        :return :server_response
     """
     response = requests.delete(f'{url_items}/{resource_id}', headers={'Authorization': f'Bearer {token}'})
     return response
