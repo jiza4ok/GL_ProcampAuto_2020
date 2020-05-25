@@ -4,7 +4,7 @@ import requests
 from subprocess import Popen
 from datetime import datetime
 from urllib.parse import urljoin
-from ..config import *
+from ..config import URLs
 
 
 def start_server(link_to_server: str, timeout=5) -> Popen:
@@ -21,7 +21,7 @@ def start_server(link_to_server: str, timeout=5) -> Popen:
     time_start = datetime.now()
     while (datetime.now() - time_start).seconds < timeout:
         try:
-            response = requests.get(urljoin(base_url, root_endpoint))
+            response = requests.get(urljoin(URLs.base_url, URLs.root_endpoint))
             response.raise_for_status()
         except (requests.exceptions.ConnectionError, requests.exceptions.HTTPError):
             continue

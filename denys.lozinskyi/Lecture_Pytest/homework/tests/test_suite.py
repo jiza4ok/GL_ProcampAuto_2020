@@ -3,7 +3,7 @@ import allure
 from requests import HTTPError
 from ..utils import api, helpers, launchers
 from ..testdata import testdata
-from ..config import local_link_to_server
+from ..config import Links
 
 # NB! Run Pytest from the "Lecture_Pytest" folder
 
@@ -13,7 +13,7 @@ def session_fixture():
     """ SETUP: runs the test server at the start of the session
         TEARDOWN: stops it as the session concludes
     """
-    server = launchers.start_server(local_link_to_server)
+    server = launchers.start_server(Links.local_link_to_server)
     yield
     api.delete_all_resources()
     launchers.stop_server(server)

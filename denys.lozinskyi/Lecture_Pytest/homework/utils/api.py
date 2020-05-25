@@ -2,14 +2,14 @@ import requests
 from requests import Response
 from urllib.parse import urljoin
 from ..testdata.testdata import correct_credentials
-from ..config import *
+from ..config import URLs
 
 
 # Joint URLs (base url with endpoints)
-url_root = urljoin(base_url, root_endpoint)
-url_login = urljoin(base_url, login_endpoint)
-url_protected = urljoin(base_url, protected_endpoint)
-url_items = urljoin(base_url, items_endpoint)
+url_root = urljoin(URLs.base_url, URLs.root_endpoint)
+url_login = urljoin(URLs.base_url, URLs.login_endpoint)
+url_protected = urljoin(URLs.base_url, URLs.protected_endpoint)
+url_items = urljoin(URLs.base_url, URLs.items_endpoint)
 
 
 def jwt_authorize(user_name: str, password: str) -> tuple:
