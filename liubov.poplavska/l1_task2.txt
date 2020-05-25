@@ -1,0 +1,4 @@
+git stash #backup current changes for a while
+git add new_file #add to stage the newly created file
+git commit --amend #then input another commit message and save
+git stash apply #take out of backup the changes which I don't want to lose
