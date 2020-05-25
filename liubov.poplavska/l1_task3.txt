@@ -1,0 +1,11 @@
+git checkout master
+git checkout -b hotfix
+git add new_file #this is my hotfix changes
+git commit -m "hotfix of the bug"
+git push -u origin hotfix #I release the fix and it is being tested now. After testing is successful, I need to merge the hotfix into master branch
+git checkout master
+git merge origin/hotfix
+git push origin master #pushing my local merge to remote
+git checkout US_123
+git merge origin/hotfix
+git push origin US_123
