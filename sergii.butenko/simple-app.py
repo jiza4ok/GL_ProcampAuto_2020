@@ -51,18 +51,38 @@ def pass200_no_auth_post():
     return jsonify(json=request.json)
 
 
-@app.route('/items', methods=['GET'])
+PATCH /times?find;name=serbut
+{
+    operation: "update",
+    fild:"name",
+    value:"new_name"
+}
+@app.route('/items', methods=['GET', 'PUT', 'PATCH'])
 @jwt_required
 def pass200():
     return jsonify(items=items)
 
-@app.route('/items/<string:item_id>', methods=['GET'])
+@app.route('/items/<string:item_id>', methods=['GET', 'PUT', 'PATCH'])
 @jwt_required
 def item_id(item_id):
     item = safe_list_get(items, int(item_id), None)
     if item is None:
         abort(400, 'Not exist')
 
+    return jsonify(items=item)
+
+
+
+@app.route('/items/<string:item_id>', methods=['POST'])
+@jwt_required
+def item_id_search(item_id):
+    item = safe_list_get(items, int(item_id), None)
+    if item is None:
+        abort(400, 'Not exist')
+
+    items.filter()
+
+    
     return jsonify(items=item)
 
 @app.route('/items', methods=['POST'])
