@@ -1,0 +1,13 @@
+git checkout master
+git checkout -b hot_fix
+touch fixes
+git commit -am "make hot fixes"
+git push --set-upstream origin hot_fix
+git checkout master
+git merge hot_fix
+git checkout US_123
+git merge hot_fix
+git push --set-upstream origin US_123
+git branch -d hot_fix
+git push origin --delete hot_fix
+

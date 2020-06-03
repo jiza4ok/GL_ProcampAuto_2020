@@ -1,0 +1,7 @@
+git stash
+git checkout <branch_of_commit_required_to_change> //if required
+<make required chages>
+git add .
+git commit --amend -m "added some required changes"
+git checkout <initial_branch> //if required
+git stash apply

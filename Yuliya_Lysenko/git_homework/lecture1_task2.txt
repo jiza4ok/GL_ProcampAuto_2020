@@ -1,0 +1,13 @@
+Task:
+"Нужно промодифицировать последний коммит: добавить файлы, поменять коммит сообщение
+условие1. У вас в индексе(стейдж области) уже есть много добавленных файлов, которые вы не хотите потерять"							
+
+Solution:
+touch lecture1_task2.txt
+touch lecture1_task3.txt
+Git add lecture1_task2.txt
+Git commit --amend -m "git_task2"
+git add lecture1_task3.txt
+Git stash
+Git push --force origin Yuliya_Lysenko
+Git stash apply

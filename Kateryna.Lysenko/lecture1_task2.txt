@@ -1,0 +1,16 @@
+Task: Нужно промодифицировать последний коммит: добавить файлы, поменять коммит сообщение
+условие1. У вас в индексе(стейдж области) уже есть много добавленных файлов, которые вы не хотите потерять"	
+
+
+Solution:						
+Let's imagine that we just committed some work.
+And then we decided to add <new_file1.txt> and <new_file2.txt> to the previous commit.
+But also we have <new_file3.txt> in the staging area that we do NOT want to include to this commit.
+
+We use:
+
+git commit -m "New commit message" --amend new_file1.txt new_file2.txt
+
+Result:
+Previous commit is modified: new files (<new_file1.txt> and <new_file2.txt>) are added, commit message is changed.
+And <new_file3.txt> persists in staging area

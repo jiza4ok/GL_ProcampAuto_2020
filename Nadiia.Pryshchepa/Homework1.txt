@@ -1,0 +1,28 @@
+task 1
+
+git checkout branch
+git revert HEAD
+git push
+
+task 2
+
+git checkout branch
+Git stash 
+git add file
+git commit --amend
+Git stash apply 
+
+task 3
+
+git checkout master
+git branch hotfix
+git checkout hotfix
+git add hotfix.file
+git commit -am "fixed"
+git push --set-upstream origin hotfix
+(Pull request hotfix to master)
+git checkout US_123
+Git merge hotfix
+
+
+	

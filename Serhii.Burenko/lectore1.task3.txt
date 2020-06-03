@@ -1,0 +1,8 @@
+git checkout master
+git add file(s)_for_hot_fix
+git commit -m "Hot fix" #  -> look at commit sha1 in git log
+git push origin master
+
+git checkout US_123
+git cherry-pick -m 1 sha1
+git push origin US_123

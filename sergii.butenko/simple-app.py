@@ -17,7 +17,7 @@ config = {
     "JWT_SECRET_KEY": 'super2-secret',
 }
 
-EXPIRE = 3
+EXPIRE = 0.5
 
 def safe_list_get (l, idx, default):
   try:
