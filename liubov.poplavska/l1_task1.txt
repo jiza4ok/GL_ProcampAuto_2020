@@ -1,0 +1,5 @@
+#assuming that I have checked that the wrong commit is the last one, and I am currenty on this branch
+git rebase HEAD~1
+git checkout -b mybranch_modified
+git push -u origin mybranch_modified
+

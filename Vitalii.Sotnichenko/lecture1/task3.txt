@@ -1,0 +1,18 @@
+Task:
+
+У вас есть два ветки: master, US_123, которая растет от master. В master нашли багу несовместимую с жизнью продукта.
+1. Вам срочно нужно сделать хотфикс баги, которая была найдена в ветке master.
+2. После того, как вы закоммититли и зарелизили багу, вам нужно получить этот же фикс в ветке US_123
+
+
+
+1. git checkout -b hotfix //from master branch
+2. git add .
+3. git commit -m "fix issue"
+4. git push origin hotfix
+5. git checkout master
+6. git merge hotfix
+7. git checkout US_123
+8. git merge hotfix
+
+

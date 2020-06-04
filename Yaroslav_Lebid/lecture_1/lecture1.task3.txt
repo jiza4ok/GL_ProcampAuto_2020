@@ -1,0 +1,14 @@
+I'm on US_123
+
+git stash //if required
+git checkout master
+git checkout -b hot-fix
+<make fixes>
+git add .
+git commit -m "hot_fix bla bla bla"
+git push --set-upstream origin hot_fix
+<pull request, merge into master>
+git checkout US_123
+git cherry-pick <hash_of_hotfix_commit>
+git stash apply //if required
+ 					

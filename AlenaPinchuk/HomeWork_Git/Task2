@@ -1,0 +1,8 @@
+git status //some files are staged
+git stash
+git checkout master // or other required branch
+git pull
+git commit -am "Fix something"
+git push
+git checkout my_branch
+git stash apply

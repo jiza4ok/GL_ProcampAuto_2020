@@ -1,0 +1,12 @@
+2) "Нужно промодифицировать последний коммит: добавить файлы, поменять коммит сообщение
+условие1. У вас в индексе(стейдж области) уже есть много добавленных файлов, которые вы не хотите потерять"
+
+git checkout "my_branch"
+Git stash
+git add .
+git commit --amend
+Git stash apply 
+
+Checking commit message in logs -git log
+
+
