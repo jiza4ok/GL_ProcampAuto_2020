@@ -1,5 +1,5 @@
 class Links:
-    """ contains links to relevant resources on the local machine"""
+    """ contains links to relevant resources on the local machine """
     local_link_to_server = 'homework/server/simple-app.py'
 
 
