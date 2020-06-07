@@ -1,0 +1,8 @@
+git stash
+
+git add file1
+git commit -m 'adding file1'
+git add file2
+git commit --amend 'adding file2 with amend'
+
+git stash apply
