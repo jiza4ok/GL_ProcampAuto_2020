@@ -1,0 +1,25 @@
+git stash
+
+git add file1
+git commit -m 'adding file1'
+git add file2
+git commit --amend 'adding file2 with amend'
+
+git stash apply
+
+
+git branch US_123
+git branch fix
+
+git checkout fix
+git add fix_file
+git commit -m 'fix'
+
+git cehckout master
+git merge fix
+git push origin
+
+git checkout US_123
+git merge master
+
+git branch -d fix
