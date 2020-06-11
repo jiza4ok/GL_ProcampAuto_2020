@@ -1,0 +1,48 @@
+#############################################################################
+# some SQL queries to be used to work with the kayaks_purchases.db database #
+#############################################################################
+
+NOTE! SQLite3 база данных kayaks_purchases.db была написана мной специально для домашнего задания,
+      все используемые в ней данные являются публичными и находятся в свободном доступе в Интернете
+
+
+SELECT:
+
+1. Показать все покупки, совершенные с начала 2019 года у украинского дилера (id=1):
+SELECT * FROM Purchases WHERE date_of_purchase > "2019-01-01" AND dealer_id =  "1";
+
+2.Посчитать, сколько каяков было приобретено в магазине британского дилера (id=3):
+SELECT COUNT(dealer_id) FROM purchases WHERE dealer_id = "3";
+
+3. Посчитать среднюю стоимость каяка на основании цен, указанных в таблице kayaks:
+SELECT AVG(price) FROM kayaks;
+
+4. Посчитать потенциальную общую выручку за все каяки, если продать их все и сразу:
+SELECT SUM(price) FROM kayaks;
+
+5. На основании таблиц purchases и kayaks показать список клиентов и приобретенные ими каяки за период с начала 2017 года:
+SELECT p.last_name, p.first_name, k.vendor, k.model FROM purchases AS p JOIN kayaks AS k ON p.kayak_id = k.kayak_id WHERE p.date_of_purchase > "2017-01-01"
+
+6. Показать в таблице Purchases имена и фамилии клиентов, фамилия которых начинается на "Ma":
+SELECT first_name, last_name FROM purchases WHERE last_name LIKE "Ma%";
+
+7. На основании таблиц purchases и kayaks показать, сколько раз была приобретена каждая отдельная модель каяка:
+SELECT k.vendor, k.model, count(k.kayak_id) FROM kayaks AS k JOIN purchases ON k.kayak_id = purchases.kayak_id GROUP BY purchases.kayak_id;
+
+8. Показать те модели каяков, цена которых находится в пределе 20000-25000 грн:
+SELECT vendor, model, price FROM kayaks WHERE price BETWEEN 20000 AND 25000;
+
+9. Показать модели каяков, производимых фирмами "Zelgear" и "Kolwear", цена которых не превышает 25000 грн:
+SELECT * FROM kayaks WHERE price <= 25000 AND vendor = "ZelGear" OR vendor = "Kolwear";
+
+10. Показать все каяки кроме гибридных:
+SELECT * FROM kayaks WHERE NOT Type = "hybrid";
+
+
+UPDATE:
+
+1. Поменять дату приобретения клиентом с фамилией каяка с серийным номером "2-805":
+UPDATE purchases SET date_of_purchase = "2010-03-04" WHERE last_name = "Lozinskyi" AND serial_number = "2-805";
+
+2. Обновить номер телефона британского диллера (id=3):
+UPDATE dealers SET phone = "+44 1234561" WHERE dealer_id = "3";
