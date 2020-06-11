@@ -1,0 +1,15 @@
+git branch US_123
+git branch fix
+
+git checkout fix
+git add fix_file
+git commit -m 'fix'
+
+git cehckout master
+git merge fix
+git push origin
+
+git checkout US_123
+git merge master
+
+git branch -d fix
