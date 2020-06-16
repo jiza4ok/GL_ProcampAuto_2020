@@ -22,7 +22,7 @@ public class AuthenticationTest {
     }
 
     @Test
-    public void shouldNotShowItemsAfterTokenExpiration() throws InterruptedException {
+    public void shouldRefreshTokenAndGetItems() throws InterruptedException {
         baseApi.login();
         sleep(2 * 60 * 1000);
 
