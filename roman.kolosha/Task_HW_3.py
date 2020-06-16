@@ -1,17 +1,18 @@
 import datetime
 import time
 
+import jwt
 import requests
+
 
 class BaseAPI:
     def __init__(self):
         self.access_token = None
         self.refresh_token = None
-        self.session = None
+        self.session = requests.Session()
         self.server = None
 
     def login(self, server: str, login: str, passw: str):
-        self.session = requests.Session()
         response = self.session.post(server + '/login', json={'username': login, 'password': passw})
         response.raise_for_status()
         self.server = server
@@ -39,34 +40,45 @@ class BaseAPI:
         response.raise_for_status()
         return response.json()['items']
 
+    def read_items(self):
+        response = self.session.get(self.server + '/items', headers={"Authorization": f"Bearer {self.access_token}"})
+        response.raise_for_status()
+        return response.json()['items']
+
     def delete_item(self, id: int):
         response = self.session.delete(self.server + '/items/' + str(id), headers={'Authorization': f'Bearer {self.access_token}'})
         response.raise_for_status()
-        print(f'Resource with {id} is deleted')
+        return response.status_code == 200
+
+    def close_connection(self):
+        self.session.close()
+
 
 baseApi = BaseAPI()
 baseApi.login('http://localhost:5002', 'test', 'test')
 tokens = baseApi.get_tokens()
 print(tokens)
-print(baseApi.renew())
-print()
-tokens = baseApi.get_tokens()
-print(tokens)
+#print(baseApi.renew())
+#print()
+#tokens = baseApi.get_tokens()
+#print(tokens)
 
-#print( baseApi.create_item(123 ))
-print( baseApi.delete_item(0) )
+#print(baseApi.create_item(123))
+#print(baseApi.read_items())
+#print(baseApi.delete_item(0))
+#print(baseApi.read_items())
+#baseApi.close_connection()
+
+print(jwt.decode(tokens[0], verify=False)['exp'])
+print(int(time.time()))
+time.sleep(40)
 
 
-
-#print(jwt.decode(tokens[0], verify=False)['exp'])
-#print(int(time.time()))
-#time.sleep(40)
-
-
-#expiration_time = jwt.decode(baseApi.get_tokens()[0], verify=False)['exp']
-#if expiration_time < int(time.time()):
-#    baseApi.renew()
-#    print("RENEWIG TOKEN")
+expiration_time = jwt.decode(baseApi.get_tokens()[0], verify=False)['exp']
+if expiration_time < int(time.time()):
+   baseApi.renew()
+   print("RENEWIG TOKEN")
 
 #tokens = baseApi.get_tokens()
 #print(tokens)
+#baseApi.close_connection()
